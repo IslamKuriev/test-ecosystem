@@ -24,7 +24,7 @@ const Product: React.FC = () => {
   }, [dispatch]);
 
   const handleFilter = (option: string) => {
-    dispatch(setFilterProducts(option));
+    dispatch(setFilterProducts(option as 'Все' | 'Избранные'));
   };
 
   const filteredProducts = allProducts.filter((product) => {
