@@ -12,6 +12,7 @@ const FullProduct = () => {
 
   const { id } = useParams();
   const findLocalProduct = localProducts.find((p) => p.id === Number(id));
+
   useEffect(() => {
     if (findLocalProduct) {
       dispatch(setProductById(findLocalProduct));
@@ -35,7 +36,7 @@ const FullProduct = () => {
         <img src={productById.thumbnail} alt="Img" />
         <p className={styles.cardDescription}>{productById.description}</p>
       </div>
-      <Link to={'/products'}>
+      <Link to={'/'}>
         <button className={styles.btnExit}>Назад</button>
       </Link>
     </>

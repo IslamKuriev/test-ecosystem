@@ -16,6 +16,7 @@ interface ProductState {
   productById: Product | null;
   like: LikeState;
   filter: 'Все' | 'Избранные';
+  isLoaded: boolean
 }
 
 const initialState: ProductState = {
@@ -24,6 +25,7 @@ const initialState: ProductState = {
   productById: null,
   like: {},
   filter: 'Все',
+  isLoaded: false,
 };
 
 const productSlice = createSlice({
@@ -32,6 +34,7 @@ const productSlice = createSlice({
   reducers: {
     setProducts(state, action: PayloadAction<Product[]>) {
       state.products = action.payload;
+      state.isLoaded = true
     },
 
     setProductById(state, action: PayloadAction<Product>) {

@@ -8,20 +8,21 @@ import ButtonsAct from '../likeButton';
 
 const Product: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { products, filter, like, localProducts } = useSelector(
+  const { products, filter, like, localProducts,isLoaded } = useSelector(
     (state: RootState) => state.product,
   );
-
+  
   const allProducts = [...products, ...localProducts];
-
   useEffect(() => {
     async function fetchData() {
-      const res = await fetch('https://dummyjson.com/products?limit=8&skip=10');
+      const res = await fetch('https://dummyjson.com/products?limit=8&skip=100');
       const data = await res.json();
       dispatch(setProducts(data.products));
     }
-    fetchData();
-  }, [dispatch]);
+    if (!isLoaded) {
+      fetchData();
+   }
+  }, [dispatch, isLoaded]);
 
   const handleFilter = (option: string) => {
     dispatch(setFilterProducts(option as 'Все' | 'Избранные'));
@@ -33,10 +34,10 @@ const Product: React.FC = () => {
     }
     return true;
   });
-
+   
   return (
     <>
-      <h2 className="title">Продукты</h2>
+      <h2 className="title">Товары</h2>
       <div className={styles.btnsFilter}>
         <button
           className={filter === 'Все' ? styles.active : undefined}
@@ -49,7 +50,7 @@ const Product: React.FC = () => {
           Избранные
         </button>
         <Link to={'/create-product'}>
-          <button style={{ marginLeft: '20px' }}>Создать продукт</button>
+          <button style={{ marginLeft: '20px' }}>Создать товар</button>
         </Link>
       </div>
       <div className={styles.cardContainer}>
@@ -64,6 +65,8 @@ const Product: React.FC = () => {
             </div>
           );
         })}
+        {filteredProducts.length === 0 && filter === 'Избранные' ? <p>Тут пусто</p>: null}
+        {filteredProducts.length === 0 && isLoaded && filter === 'Все' ? <p>Тут пусто</p>: null}
       </div>
     </>
   );

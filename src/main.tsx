@@ -7,7 +7,7 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   // <StrictMode>
-  <BrowserRouter>
+  <BrowserRouter basename="/test-ecosystem/">
     <Provider store={store}>
       <App />
     </Provider>

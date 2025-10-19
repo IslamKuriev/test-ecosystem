@@ -37,12 +37,12 @@ const CreateProduct: React.FC = () => {
     setDescription('');
     setImage(null);
 
-    navigate('/products');
+    navigate('/');
   };
 
   return (
     <div className={styles.container}>
-      <Link to={'/products'}>
+      <Link to={'/'}>
         <button>Назад</button>
       </Link>
       <h1>Создать продукт</h1>
