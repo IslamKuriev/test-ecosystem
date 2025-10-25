@@ -7,7 +7,7 @@ import './index.css';
 
 createRoot(document.getElementById('root')!).render(
   // <StrictMode>
-  <HashRouter basename="/test-ecosystem/">
+  <HashRouter>
     <Provider store={store}>
       <App />
     </Provider>
